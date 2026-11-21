@@ -6,6 +6,7 @@
 <meta property="og:image" content="https://motionabner.github.io/enzo-safari/og.jpg"><meta property="og:type" content="website">
 <style>html,body{margin:0}[hidden]{display:none!important}</style>
 <title>Cumple de Enzo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Nunito:wght@400;600;800&display=swap">
 <style>
 /* Concept: safari boho. Cover with 3 poppable balloons, then a cream invitation with a balloon garland, tappable animals and pending details. */
@@ -45,7 +46,8 @@ button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:poin
 .hero .sub{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--sage-deep);margin:0}
 .hero h2{font:400 clamp(88px,30vw,150px)/.95 var(--script);margin:4px 0 0;color:var(--ink)}
 .hero .lead{font-size:18px;margin:8px auto 0;max-width:30ch;line-height:1.45}
-.baby{width:min(78%,330px);margin:14px auto 0;mix-blend-mode:multiply}
+.scene{width:100%;margin:18px auto 0}
+.hmonkey{position:absolute;top:0;right:3%;width:15%;transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite;z-index:2}
 .rainbow{position:absolute;top:128px;left:2%;width:19%;opacity:.95}
 .bird{position:absolute;top:210px;right:5%;width:8%}
 
@@ -79,7 +81,7 @@ button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:poin
 .btn[disabled]{background:#C9D3C4;color:#fff;cursor:default}
 .foot{text-align:center;margin-top:26px;font:400 30px var(--script)}
 canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}
-@media (prefers-reduced-motion:reduce){.balloon,.monkey{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.balloon,.monkey,.hmonkey{animation:none!important}}
 </style>
 
 </head><body>
@@ -99,10 +101,11 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
     <svg class="garland" id="garland" viewBox="0 0 400 190" aria-hidden="true"></svg>
     <img class="rainbow" src="rainbow.webp" alt="">
     <img class="bird" src="bird.webp" alt="">
+    <img class="hmonkey" src="monkey.webp" alt="Mono colgado">
     <p class="sub">Te invito al cumpleaños de</p>
     <h2>Enzo</h2>
     <p class="lead">Ven a vivir una gran aventura salvaje con nosotros.</p>
-    <img class="baby" src="baby.jpg" alt="Elefante bebé en acuarela">
+    <img class="scene" src="scene.webp" alt="Jirafa, león, cebra, elefante, tigre, cocodrilo e hipopótamo">
   </header>
 
   <section class="card" aria-labelledby="d">
@@ -130,7 +133,7 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
   </section>
 
   <section class="rsvp">
-    <button class="btn" disabled>Confirmar asistencia (pronto)</button>
+    <button class="btn" id="rsvp">Confirmar tu asistencia</button>
   </section>
   <div class="foot">¡Te esperamos!</div>
 </main>
@@ -168,6 +171,7 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
     P=P.filter(function(p){p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.009;
       if(p.l<=0||p.y>cv.height+20)return false;cx.save();cx.globalAlpha=Math.min(1,p.l*2);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();return true;});
     if(P.length)requestAnimationFrame(tick);else run=false;}
+  document.getElementById("rsvp").onclick=function(){var r=this.getBoundingClientRect();burst(r.left+r.width/2,r.top,null,60);};
   // animals
   var zoo=document.getElementById('zoo'),bub=document.getElementById('bubble'),tm;
   zoo.querySelectorAll('button').forEach(function(b){b.onclick=function(){
