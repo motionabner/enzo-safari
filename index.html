@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="Cumple de Enzo">
+<meta property="og:description" content="Te invito a vivir una gran aventura salvaje">
+<meta property="og:image" content="https://motionabner.github.io/enzo-safari/og.jpg"><meta property="og:type" content="website">
+<style>html,body{margin:0}[hidden]{display:none!important}</style>
+<title>Cumple de Enzo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Concept: safari boho. Cover with 3 poppable balloons, then a cream invitation with a balloon garland, tappable animals and pending details. */
+:root{
+  --sage:#A9BFA0; --sage-deep:#6E8C69; --sky:#BCD7E6; --butter:#F3E3B0; --cream:#FBF6EA; --ink:#4A5846; --clay:#D98B5F;
+  --script:'Yellowtail','Brush Script MT',cursive; --body:'Nunito',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);overflow-x:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:8px}
+
+/* cover */
+.cover{position:fixed;inset:0;z-index:20;background:linear-gradient(180deg,var(--sky) 0%,#DDE8E2 45%,var(--sage) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;transition:opacity .7s,transform .7s}
+.cover.gone{opacity:0;transform:scale(1.06);pointer-events:none}
+.cover .palms{position:absolute;bottom:-4%;left:50%;width:min(120vw,640px);transform:translateX(-50%);opacity:.9}
+.cover .monkey{position:absolute;top:0;right:7%;width:min(24vw,110px);transform-origin:50% 0;animation:swing 3.4s ease-in-out infinite}
+.cover h1{font:400 clamp(72px,24vw,130px)/1 var(--script);margin:0;color:var(--ink);position:relative}
+.cover p{margin:6px 0 0;font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;position:relative}
+.balloons{display:flex;gap:6px;justify-content:center;margin-top:18px;position:relative}
+.balloon{width:92px;animation:bob 3s ease-in-out infinite}
+.balloon:nth-child(2){animation-delay:-1s;margin-top:-18px}.balloon:nth-child(3){animation-delay:-2s}
+.balloon svg{width:100%;height:auto;display:block;overflow:visible}
+.balloon.pop{animation:none;transform:scale(1.5);opacity:0;transition:.25s}
+.hint{margin-top:14px;font-size:15px;position:relative;background:var(--cream);padding:6px 14px;border-radius:99px}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+@keyframes swing{0%,100%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}}
+
+/* invitation */
+.invite{max-width:520px;margin:0 auto;padding-block:0 40px;position:relative}
+.hero{position:relative;text-align:center;padding-top:20px}
+.garland{display:block;width:100%;height:auto;margin-bottom:-26px}
+.hero .sub{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--sage-deep);margin:0}
+.hero h2{font:400 clamp(88px,30vw,150px)/.95 var(--script);margin:4px 0 0;color:var(--ink)}
+.hero .lead{font-size:18px;margin:8px auto 0;max-width:30ch;line-height:1.45}
+.baby{width:min(78%,330px);margin:14px auto 0;mix-blend-mode:multiply}
+.rainbow{position:absolute;top:128px;left:2%;width:19%;opacity:.95}
+.bird{position:absolute;top:210px;right:5%;width:8%}
+
+.card{margin:8px 0 0;background:#fff;border-radius:28px;padding:26px 22px;box-shadow:0 10px 30px rgba(110,140,105,.18);position:relative}
+.card h3{font:400 38px/1 var(--script);margin:0 0 14px;text-align:center}
+.rows{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--cream)}
+.row b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-deep)}
+.row span{font-weight:600;min-width:0}
+.pending{font-style:italic;opacity:.75}
+.note{margin:16px 0 0;font-size:14px;text-align:center;opacity:.8}
+
+.stage{margin-top:34px;text-align:center}
+.stage h3{font:400 40px/1 var(--script);margin:0}
+.stage p{margin:6px 0 14px;font-size:15px}
+.zoo{position:relative;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:6px;padding:26px 8px 0;border-radius:28px;
+  background:linear-gradient(180deg,var(--sky),#E6EEE8 60%,var(--butter));overflow:hidden}
+.zoo button{display:flex;justify-content:center;align-items:flex-end;transition:transform .2s}
+.zoo button:active{transform:scale(.92) rotate(-3deg)}
+.zoo img{max-height:230px;width:auto}
+.zoo .wide{grid-column:span 3;margin-top:-6px}
+.zoo .wide img{max-height:120px}
+.ground{height:26px;background:var(--sage);margin:0 -8px}
+.bubble{position:absolute;z-index:3;background:#fff;border-radius:18px;padding:8px 14px;font-weight:800;font-size:15px;box-shadow:0 6px 16px rgba(0,0,0,.14);
+  transform:translate(-50%,-100%) scale(.6);opacity:0;pointer-events:none;transition:.2s;white-space:nowrap}
+.bubble.show{transform:translate(-50%,-100%) scale(1);opacity:1}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-7px;border:7px solid transparent;border-bottom:0;border-top-color:#fff}
+
+.rsvp{margin-top:30px;text-align:center}
+.btn{display:inline-block;padding:15px 28px;border-radius:99px;background:var(--sage-deep);color:#fff;font-weight:800;font-size:16px;letter-spacing:.04em}
+.btn[disabled]{background:#C9D3C4;color:#fff;cursor:default}
+.foot{text-align:center;margin-top:26px;font:400 30px var(--script)}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.balloon,.monkey{animation:none!important}}
+</style>
+
+</head><body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<section class="cover" id="cover" aria-label="Portada">
+  <img class="palms" src="palms.webp" alt="">
+  <img class="monkey" src="monkey.webp" alt="">
+  <h1>Enzo</h1>
+  <p>Una aventura te espera</p>
+  <div class="balloons" id="balloons"></div>
+  <div class="hint" id="hint">Toca los 3 globos</div>
+</section>
+
+<main class="invite" id="invite">
+  <header class="hero">
+    <svg class="garland" id="garland" viewBox="0 0 400 190" aria-hidden="true"></svg>
+    <img class="rainbow" src="rainbow.webp" alt="">
+    <img class="bird" src="bird.webp" alt="">
+    <p class="sub">Te invito al cumpleaños de</p>
+    <h2>Enzo</h2>
+    <p class="lead">Ven a vivir una gran aventura salvaje con nosotros.</p>
+    <img class="baby" src="baby.jpg" alt="Elefante bebé en acuarela">
+  </header>
+
+  <section class="card" aria-labelledby="d">
+    <h3 id="d">Los detalles</h3>
+    <div class="rows">
+      <div class="row"><b>Fecha</b><span class="pending">Por confirmar</span></div>
+      <div class="row"><b>Hora</b><span class="pending">Por confirmar</span></div>
+      <div class="row"><b>Lugar</b><span class="pending">Por confirmar</span></div>
+    </div>
+    <p class="note">Muy pronto te compartiremos todos los datos.</p>
+  </section>
+
+  <section class="stage">
+    <h3>Conoce a los invitados</h3>
+    <p>Toca a los animales para saludarlos.</p>
+    <div class="zoo" id="zoo">
+      <div class="bubble" id="bubble"></div>
+      <button data-say="¡Qué alto se ve todo desde aquí!"><img src="giraffe.webp" alt="Jirafa"></button>
+      <button data-say="¡ROAR! Yo guardo la fiesta"><img src="lion.webp" alt="León"></button>
+      <button data-say="¡Llevo rayas de gala!"><img src="zebra.webp" alt="Cebra"></button>
+      <button class="wide" data-say="Yo traigo el pastel"><img src="elephant.webp" alt="Elefante"></button>
+      <button class="wide" data-say="¡Buuu... digo, feliz cumple!"><img src="hippo.webp" alt="Hipopótamo"></button>
+      <div class="ground" style="grid-column:span 3"></div>
+    </div>
+  </section>
+
+  <section class="rsvp">
+    <button class="btn" disabled>Confirmar asistencia (pronto)</button>
+  </section>
+  <div class="foot">¡Te esperamos!</div>
+</main>
+
+<script>
+(function(){
+  var COL=['#A9BFA0','#BCD7E6','#F3E3B0','#6E8C69','#E8D8C3','#D98B5F'];
+  // balloons
+  function bal(c){return '<svg viewBox="0 0 100 140"><ellipse cx="50" cy="52" rx="38" ry="46" fill="'+c+'"/><ellipse cx="36" cy="34" rx="9" ry="14" fill="#fff" opacity=".4" transform="rotate(-25 36 34)"/><path d="M50 98l-7 9h14z" fill="'+c+'"/><path d="M50 107c-8 10 8 18 0 32" stroke="#8a8a7a" stroke-width="2" fill="none"/></svg>';}
+  var wrap=document.getElementById('balloons'),left=3;
+  ['#F3E3B0','#6E8C69','#BCD7E6'].forEach(function(c,i){
+    var b=document.createElement('button');b.className='balloon';b.setAttribute('aria-label','Globo '+(i+1));b.innerHTML=bal(c);
+    b.onclick=function(){
+      if(b.classList.contains('pop'))return;b.classList.add('pop');
+      var r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height*.4,c,26);
+      if(--left===0){document.getElementById('hint').textContent='¡Bienvenido!';
+        setTimeout(function(){burst(innerWidth/2,innerHeight/2,null,120);document.getElementById('cover').classList.add('gone');},350);}
+      else document.getElementById('hint').textContent='Faltan '+left+' globo'+(left>1?'s':'');
+    };wrap.appendChild(b);
+  });
+  // garland arc
+  var g=document.getElementById('garland'),s='';
+  for(var i=0;i<=26;i++){var t=i/26,a=Math.PI*(1-t),x=200+185*Math.cos(a),y=185-165*Math.sin(a)*0.96;
+    var r=11+((i*7)%5)*2.6;s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" fill="'+COL[(i*5)%5]+'"/>';
+    if(i%3==1){var x2=200+170*Math.cos(a),y2=185-148*Math.sin(a)*0.96;s+='<ellipse cx="'+x2.toFixed(1)+'" cy="'+y2.toFixed(1)+'" rx="12" ry="5" fill="#8FAE86" transform="rotate('+(-Math.round(t*180-90))+' '+x2.toFixed(1)+' '+y2.toFixed(1)+')"/>';}
+  }
+  g.innerHTML=s;
+  // confetti
+  var cv=document.getElementById('fx'),cx=cv.getContext('2d'),P=[],run=false;
+  function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+  function burst(x,y,c,n){for(var i=0;i<n;i++){var a=Math.random()*6.28,v=3+Math.random()*7;
+    P.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,w:5+Math.random()*6,h:3+Math.random()*5,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:c||COL[i%6],l:1});}
+    if(!run){run=true;requestAnimationFrame(tick);}}
+  function tick(){cx.clearRect(0,0,cv.width,cv.height);
+    P=P.filter(function(p){p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.009;
+      if(p.l<=0||p.y>cv.height+20)return false;cx.save();cx.globalAlpha=Math.min(1,p.l*2);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();return true;});
+    if(P.length)requestAnimationFrame(tick);else run=false;}
+  // animals
+  var zoo=document.getElementById('zoo'),bub=document.getElementById('bubble'),tm;
+  zoo.querySelectorAll('button').forEach(function(b){b.onclick=function(){
+    var r=b.getBoundingClientRect(),z=zoo.getBoundingClientRect();
+    bub.textContent=b.dataset.say;bub.style.left=Math.min(z.width-90,Math.max(90,r.left-z.left+r.width/2))+'px';bub.style.top=Math.max(34,r.top-z.top+18)+'px';
+    bub.classList.add('show');clearTimeout(tm);tm=setTimeout(function(){bub.classList.remove('show')},2200);
+    burst(r.left+r.width/2,r.top+30,null,14);};});
+})();
+</script>
+
+</body></html>
