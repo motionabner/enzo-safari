@@ -2,12 +2,12 @@
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="Cumple de Enzo">
-<meta property="og:description" content="Te invito a vivir una gran aventura salvaje">
+<meta property="og:description" content="Cumple 3 años">
 <meta property="og:image" content="https://motionabner.github.io/enzo-safari/og.jpg"><meta property="og:type" content="website">
 <style>html,body{margin:0}[hidden]{display:none!important}</style>
 <title>Cumple de Enzo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Nunito:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Nunito:wght@400;600;800&family=Fredoka:wght@600&display=swap">
 <style>
 /* Concept: safari boho. Cover with 3 poppable balloons, then a cream invitation with a balloon garland, tappable animals and pending details. */
 :root{
@@ -44,6 +44,13 @@ button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:poin
 .hero{position:relative;text-align:center;padding-top:20px}
 .garland{display:block;width:100%;height:auto;margin-bottom:-26px}
 .hero .sub{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--sage-deep);margin:0}
+.ywt{display:flex;flex-direction:column;align-items:center;line-height:1;margin-top:6px}
+.ywt .y{font:800 26px var(--body);letter-spacing:.28em;text-transform:uppercase;margin-right:-.28em}
+.ywt .w{font:400 clamp(44px,15vw,66px)/1 var(--script);margin:-2px 0 -6px}
+.ywt .three{font:600 clamp(64px,22vw,104px)/1 'Fredoka',var(--body);letter-spacing:.02em}
+.ywt i{font-style:normal}.ywt i:nth-child(1){color:#7FA3D1}.ywt i:nth-child(2){color:#6E8C69}.ywt i:nth-child(3){color:#D98B5F}.ywt i:nth-child(4){color:#E3B04B}.ywt i:nth-child(5){color:#D98B5F}
+.hero .lead{margin-top:18px}
+.hero h2{font-size:clamp(70px,24vw,112px);margin-top:2px}
 .hero h2{font:400 clamp(88px,30vw,150px)/.95 var(--script);margin:4px 0 0;color:var(--ink)}
 .hero .lead{font-size:18px;margin:8px auto 0;max-width:30ch;line-height:1.45}
 .scene{width:100%;margin:18px auto 0}
@@ -93,7 +100,7 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
   <img class="palms" src="palms.webp" alt="">
   <img class="monkey" src="monkey.webp" alt="">
   <h1>Enzo</h1>
-  <p>Una aventura te espera</p>
+  <p>Cumple 3 años</p>
   <div class="balloons" id="balloons"></div>
   <div class="hint" id="hint">Toca los 3 globos</div>
 </section>
@@ -104,9 +111,13 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
     <img class="rainbow" src="rainbow.webp" alt="">
     <img class="bird" src="bird.webp" alt="">
     <img class="hmonkey" src="monkey.webp" alt="Mono colgado">
-    <p class="sub">Te invito al cumpleaños de</p>
+    <div class="ywt">
+      <span class="y">Young</span>
+      <span class="w">wild &amp;</span>
+      <span class="three" aria-label="Three"><i>T</i><i>H</i><i>R</i><i>E</i><i>E</i></span>
+    </div>
+    <p class="lead">Acompáñanos a celebrar el cumpleaños de</p>
     <h2>Enzo</h2>
-    <p class="lead">Ven a vivir una gran aventura salvaje con nosotros.</p>
     <img class="scene" src="scene.webp" alt="Jirafa, león, cebra, elefante, tigre, cocodrilo e hipopótamo">
   </header>
 
