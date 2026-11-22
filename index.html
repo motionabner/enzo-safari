@@ -69,6 +69,17 @@ button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:poin
 .map small{display:block;font-weight:600;font-size:12px;text-decoration:none;opacity:.85}
 .note{margin:16px 0 0;font-size:14px;text-align:center;opacity:.8}
 
+.acts{display:flex;gap:10px;margin-top:16px}
+.acts .btn{flex:1;text-align:center;padding:13px 10px;text-decoration:none}
+.btn.alt{background:var(--clay)}
+.count{margin-top:28px;text-align:center}
+.count h3{font:400 40px/1 var(--script);margin:0 0 12px}
+.cells{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cells div{background:#fff;border-radius:18px;padding:14px 4px 10px;box-shadow:0 6px 18px rgba(110,140,105,.15)}
+.cells div:nth-child(1) b{color:#7FA3D1}.cells div:nth-child(2) b{color:#6E8C69}.cells div:nth-child(3) b{color:#D98B5F}.cells div:nth-child(4) b{color:#E3B04B}
+.cells b{display:block;font:600 36px/1 'Fredoka',var(--body);font-variant-numeric:tabular-nums}
+.cells span{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.count p{margin:12px 0 0;font-weight:800}
 .stage{margin-top:34px;text-align:center}
 .stage h3{font:400 40px/1 var(--script);margin:0}
 .stage p{margin:6px 0 14px;font-size:15px}
@@ -128,8 +139,18 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
       <div class="row"><b>Hora</b><span>3:30 pm</span></div>
       <div class="row"><b>Lugar</b><span>Nido Arcoíris<br><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Nido%20Arco%C3%ADris%2C%20Jir%C3%B3n%20Estados%20Unidos%20871%2C%20Jes%C3%BAs%20Mar%C3%ADa%2C%20Lima" target="_blank" rel="noopener">Jirón Estados Unidos 871, Jesús María<small>Ver en Google Maps</small></a></span></div>
     </div>
-    <p class="note"><a class="map" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Cumplea%C3%B1os%20de%20Enzo&amp;dates=20261219T153000/20261219T183000&amp;ctz=America/Lima&amp;location=Nido%20Arco%C3%ADris%2C%20Jir%C3%B3n%20Estados%20Unidos%20871%2C%20Jes%C3%BAs%20Mar%C3%ADa" target="_blank" rel="noopener">Agregar al calendario</a></p>
+    <div class="acts">
+      <a class="btn sm" href="https://www.google.com/maps/search/?api=1&amp;query=Nido%20Arco%C3%ADris%2C%20Jir%C3%B3n%20Estados%20Unidos%20871%2C%20Jes%C3%BAs%20Mar%C3%ADa%2C%20Lima" target="_blank" rel="noopener">Cómo llegar</a>
+      <a class="btn sm alt" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Cumplea%C3%B1os%20de%20Enzo&amp;dates=20261219T153000/20261219T183000&amp;ctz=America/Lima&amp;location=Nido%20Arco%C3%ADris%2C%20Jir%C3%B3n%20Estados%20Unidos%20871%2C%20Jes%C3%BAs%20Mar%C3%ADa" target="_blank" rel="noopener">Agendar</a>
+    </div>
     </section>
+
+
+  <section class="count" aria-label="Cuenta regresiva">
+    <h3>Faltan</h3>
+    <div class="cells" id="cd"><div><b id="cd-d">--</b><span>días</span></div><div><b id="cd-h">--</b><span>horas</span></div><div><b id="cd-m">--</b><span>min</span></div><div><b id="cd-s">--</b><span>seg</span></div></div>
+    <p id="cd-msg"></p>
+  </section>
 
   <section class="stage">
     <h3>Conoce a los invitados</h3>
@@ -185,6 +206,13 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-event
       if(p.l<=0||p.y>cv.height+20)return false;cx.save();cx.globalAlpha=Math.min(1,p.l*2);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();return true;});
     if(P.length)requestAnimationFrame(tick);else run=false;}
   document.getElementById("rsvp").onclick=function(){var r=this.getBoundingClientRect();burst(r.left+r.width/2,r.top,null,60);};
+  // countdown
+  var T=new Date('2026-12-19T15:30:00-05:00').getTime();
+  function pad(n){return n<10?'0'+n:''+n}
+  function cdTick(){var d=T-Date.now(),q=function(i,v){document.getElementById(i).textContent=v};
+    if(d<=0){q('cd-d','0');q('cd-h','00');q('cd-m','00');q('cd-s','00');document.getElementById('cd-msg').textContent='¡Hoy es la fiesta de Enzo!';return;}
+    q('cd-d',Math.floor(d/864e5));q('cd-h',pad(Math.floor(d/36e5)%24));q('cd-m',pad(Math.floor(d/6e4)%60));q('cd-s',pad(Math.floor(d/1e3)%60));}
+  cdTick();setInterval(cdTick,1000);
   // animals
   var zoo=document.getElementById('zoo'),bub=document.getElementById('bubble'),tm;
   zoo.querySelectorAll('button').forEach(function(b){b.onclick=function(){
